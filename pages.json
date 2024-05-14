@@ -23,7 +23,20 @@
   	"style": {
   		"navigationBarTitleText": "我的"
   	}
-  },
+  }
+  ],
+  "subPackages":[
+    {
+      "root": "subpkg",
+      "pages": [
+        {
+        "path" : "goods_details/goods_details"
+      },
+      {
+        "path" : "goods_list/goods_list"
+      }
+     ]
+    }
   ],
   "tabBar": {
     "list": [
@@ -57,7 +70,8 @@
 		"navigationBarTextStyle": "black",
     "enablePullDownRefresh": true,
 		"navigationBarTitleText": "uni-app",
-		"navigationBarBackgroundColor": "#ffffff",
+		"navigationBarBackgroundColor": "#b5cde4",
+    // 下拉刷新的背景颜色
 		"backgroundColor": "#ffffff",
 		"app-plus": {
 			"background": "#ffffff"

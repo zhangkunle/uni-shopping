@@ -5,11 +5,20 @@
     "pages/cart/cart",
     "pages/my/my"
   ],
+  "subPackages": [
+    {
+      "root": "subpkg",
+      "pages": [
+        "goods_details/goods_details",
+        "goods_list/goods_list"
+      ]
+    }
+  ],
   "window": {
     "navigationBarTextStyle": "black",
     "enablePullDownRefresh": true,
     "navigationBarTitleText": "uni-app",
-    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarBackgroundColor": "#b5cde4",
     "backgroundColor": "#ffffff"
   },
   "tabBar": {
