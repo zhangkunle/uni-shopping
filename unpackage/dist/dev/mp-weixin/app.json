@@ -10,15 +10,16 @@
       "root": "subpkg",
       "pages": [
         "goods_details/goods_details",
-        "goods_list/goods_list"
+        "goods_list/goods_list",
+        "goods_search/goods_search"
       ]
     }
   ],
   "window": {
-    "navigationBarTextStyle": "black",
+    "navigationBarTextStyle": "white",
     "enablePullDownRefresh": true,
     "navigationBarTitleText": "uni-app",
-    "navigationBarBackgroundColor": "#b5cde4",
+    "navigationBarBackgroundColor": "#c00000",
     "backgroundColor": "#ffffff"
   },
   "tabBar": {

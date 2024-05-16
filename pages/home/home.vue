@@ -1,7 +1,5 @@
 <template>
-  <view class="search_box">
-    <input type="text" value="搜索" class="search_input" />
-  </view>
+  <my-search></my-search>
   <swiper :indicator-dots="true" :autoplay="true">
     <swiper-item v-for="item in swiperList" :key="item.goods_id">
       <navigator :url="'/subpkg/goods_details/goods_details?goods_id=' + item.goods_id">
@@ -92,23 +90,6 @@
 <style lang="scss">
   .swiper_img {
     width: 100%;
-  }
-
-  .search_box {
-    height: 30px;
-    background-color: #b5cde4;
-  }
-
-  .search_input {
-    width: 90%;
-    height: 20px;
-    line-height: 30px;
-    margin: 0 auto;
-    font-size: 14px;
-    text-align: center;
-    background-color: #fff;
-    border-radius: 12px;
-    border: 1px solid #b5cde4;
   }
 
   .cate_simple {

@@ -1,4 +1,5 @@
 <template>
+    <my-search></my-search>
   <view class="scroll_view">
     <scroll-view class="left_scroll_box" scroll-y="true" :style="{height:wh+'px'}">
       <block v-for="(item,i) in cateList" :key="i">
