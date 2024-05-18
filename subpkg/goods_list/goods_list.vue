@@ -36,7 +36,6 @@
       async getGoodsList(cb) {
         this.isLoading = true
         const res = await $http.get('/api/public/v1/goods/search', this.requestQuery)
-        console.log(res)
         this.isLoading = false
         cb && cb()
         if (res.data.meta.status === 200) {
