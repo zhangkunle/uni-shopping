@@ -8,6 +8,13 @@
     "miniprogram": {
       "list": [
         {
+          "name": "subpkg/goods_list/goods_list",
+          "pathName": "subpkg/goods_list/goods_list",
+          "query": "query=%E6%9C%8D%E9%A5%B0",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "pages/home/home",
           "pathName": "pages/home/home",
           "query": "",
