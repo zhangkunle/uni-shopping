@@ -21,7 +21,8 @@
             mode="widthFix"></image>
         </navigator>
         <view class="right-img-box">
-          <navigator class="right-img-item" v-for="(item2,i2) in item.product_list" :key="i2" :url="item2.navigator_url">
+          <navigator class="right-img-item" v-for="(item2,i2) in item.product_list" :key="i2"
+            :url="item2.navigator_url">
             <image :src="item2.image_src" :style="{width: item2.image_width + 'rpx'}" mode="widthFix" v-if="i2!==0">
             </image>
           </navigator>
@@ -37,7 +38,9 @@
   } from '@escook/request-miniprogram'
   uni.$http = $http
   $http.baseUrl = 'https://api-hmugo-web.itheima.net'
+  import badgeMinix from '../../mixins/tabbar_badge.js';
   export default {
+    mixins: [badgeMinix],
     data() {
       return {
         swiperList: [],
@@ -76,10 +79,10 @@
       async getFloorData() {
         const res = await $http.get('/api/public/v1/home/floordata')
         if (res.statusCode !== 200) showMsg()
-        res.data.message.forEach((item)=>{
-           item.product_list.forEach((prod)=>{
-             prod.navigator_url='/subpkg/goods_list/goods_list?' +prod.navigator_url.split('?')[1]
-           })
+        res.data.message.forEach((item) => {
+          item.product_list.forEach((prod) => {
+            prod.navigator_url = '/subpkg/goods_list/goods_list?' + prod.navigator_url.split('?')[1]
+          })
         })
         this.floorData = res.data.message
       }

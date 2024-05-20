@@ -1,7 +1,7 @@
 <template>
   <view class="goods_list_box">
     <block v-for="(item,i) in goodsList" :key="i">
-      <my-goods :goods="item"></my-goods>
+      <my-goods :goods="item" :showRadioNumber="false"></my-goods>
     </block>
   </view>
 </template>
@@ -55,7 +55,7 @@
       this.total = 0
       this.isloading = false
       this.goodsList = []
-      this.getGoodsList(()=>uni.stopPullDownRefresh())
+      this.getGoodsList(() => uni.stopPullDownRefresh())
     }
   }
 </script>

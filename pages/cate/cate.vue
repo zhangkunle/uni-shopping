@@ -1,5 +1,5 @@
 <template>
-    <my-search></my-search>
+  <my-search></my-search>
   <view class="scroll_view">
     <scroll-view class="left_scroll_box" scroll-y="true" :style="{height:wh+'px'}">
       <block v-for="(item,i) in cateList" :key="i">
@@ -21,14 +21,16 @@
 </template>
 
 <script>
+  import badgeMinix from '../../mixins/tabbar_badge.js';
   export default {
+    mixins: [badgeMinix],
     data() {
       return {
         wh: 0,
         cateList: [],
         active: 0,
         cateLevel2: [],
-         scrollTop: 0
+        scrollTop: 0
       };
     },
     onLoad() {
@@ -50,10 +52,10 @@
         this.cateLevel2 = this.cateList[i].children
         this.scrollTop = this.scrollTop ? 0 : 1
       },
-      gotoGoodsList(item3){
-         uni.navigateTo({
-            url: '/subpkg/goods_list/goods_list?cid=' + item3.cat_id
-          })
+      gotoGoodsList(item3) {
+        uni.navigateTo({
+          url: '/subpkg/goods_list/goods_list?cid=' + item3.cat_id
+        })
       }
     }
   }
@@ -107,12 +109,15 @@
         width: 100%;
         display: flex;
         flex-wrap: wrap;
+
         .right_item {
           padding-left: 60rpx;
-          .item_title{
+
+          .item_title {
             font-size: 24rpx;
             text-align: center;
           }
+
           .right_img {
             width: 130rpx;
           }

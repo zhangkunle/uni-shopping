@@ -19,7 +19,7 @@
     }
   },
   "compileType": "miniprogram",
-  "libVersion": "3.4.3",
+  "libVersion": "",
   "appid": "wxf5f36aafd7e13d4c",
   "projectname": "uni-shopping",
   "condition": {

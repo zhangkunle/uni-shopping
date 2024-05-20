@@ -20,23 +20,31 @@
         快递：免运费
       </view>
     </view>
-  </view>
-  <view class="goods_del">
-    <rich-text :nodes="goodsInfo.goods_introduce"></rich-text>
-  </view>
-  <view class="goods-carts">
-    <uni-goods-nav :options="options" :fill="true" :button-group="buttonGroup" @click="onClick"
-      @buttonClick="buttonClick" />
+    <view class="goods_del">
+      <rich-text :nodes="goodsInfo.goods_introduce"></rich-text>
+    </view>
+    <view class="goods-carts">
+      <uni-goods-nav :options="options" :fill="true" :button-group="buttonGroup" @click="onClick"
+        @buttonClick="buttonClick" />
+    </view>
   </view>
 </template>
 
 <script>
+  import {
+    mapState,
+    mapMutations,
+    mapGetters
+  } from 'vuex'
   import {
     $http
   } from '@escook/request-miniprogram'
   uni.$http = $http
   $http.baseUrl = 'https://api-hmugo-web.itheima.net'
   import showMsg from '../../contant/showMsg.js'
+  import {
+    computed
+  } from 'vue'
   export default {
     onLoad(options) {
       const goods_id = options.goods_id
@@ -45,8 +53,7 @@
     data() {
       return {
         goodsInfo: {},
-        options: [
-          {
+        options: [{
             icon: 'shop',
             text: '店铺',
             info: 0,
@@ -59,8 +66,7 @@
             info: 0
           },
         ],
-        buttonGroup: [
-          {
+        buttonGroup: [{
             text: '加入购物车',
             backgroundColor: 'linear-gradient(90deg, #FFCD1E, #FF8A18)',
             color: '#fff'
@@ -71,37 +77,65 @@
             color: '#fff'
           }
         ]
-    }
-  },
-  methods: {
-    async getGoodsInfo(goods_id) {
-      const res = await $http.get('/api/public/v1/goods/detail', {
-        goods_id
-      })
-      if (res.data.meta.status !== 200) return showMsg()
-      res.data.message.goods_introduce = res.data.message.goods_introduce.replace(/<img /g,
-        '<img style="display:block;" ').replace(/webp/g, 'jpg')
-      this.goodsInfo = res.data.message
-    },
-    previewImage(index, pic) {
-      uni.previewImage({
-        urls: this.goodsInfo.pics.map(x => x.pics_big),
-        current: index,
-        loop: true
-      })
-    },
-    onClick(e) {
-      if(e.content.text === '购物车'){
-        uni.switchTab({
-          url:'/pages/cart/cart'
-        })
       }
     },
-    buttonClick(e) {
-      console.log(e)
-      this.options[1].info++
+    methods: {
+      async getGoodsInfo(goods_id) {
+        const res = await $http.get('/api/public/v1/goods/detail', {
+          goods_id
+        })
+        if (res.data.meta.status !== 200) return showMsg()
+        res.data.message.goods_introduce = res.data.message.goods_introduce.replace(/<img /g,
+          '<img style="display:block;" ').replace(/webp/g, 'jpg')
+        this.goodsInfo = res.data.message
+      },
+      previewImage(index, pic) {
+        uni.previewImage({
+          urls: this.goodsInfo.pics.map(x => x.pics_big),
+          current: index,
+          loop: true
+        })
+      },
+      ...mapMutations('m_cart', ['toAddCart']),
+      onClick(e) {
+        if (e.content.text === '购物车') {
+          uni.switchTab({
+            url: '/pages/cart/cart'
+          })
+        }
+      },
+      buttonClick(e) {
+        if (e.content.text === '加入购物车') {
+          const goods = {
+            goods_id: this.goodsInfo.goods_id,
+            goods_price: this.goodsInfo.goods_price,
+            goods_name: this.goodsInfo.goods_name,
+            goods_count: 1,
+            goods_big_logo: this.goodsInfo.goods_big_logo,
+            goods_state: true
+          }
+          this.toAddCart(goods)
+        }
+      }
+    },
+    computed: {
+      // 引入vuex中的state,getters值
+      ...mapState('m_cart', ['cart']),
+      ...mapGetters('m_cart', ['totals'])
+    },
+    watch: {
+      // 1. 监听 total 值的变化，通过第一个形参得到变化后的新值
+      totals: {
+        handler(newVal) {
+          // 2. 通过数组的 find() 方法，找到购物车按钮的配置对象
+          const findResult = this.options.find((x) => x.text === '购物车')
+          if (findResult) {
+            findResult.info = newVal
+          }
+        },
+        immediate: true
+      }
     }
-  }
   }
 </script>
 

@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
 const common_vendor = require("./common/vendor.js");
+const store_store = require("./store/store.js");
 if (!Math) {
   "./pages/home/home.js";
   "./pages/cate/cate.js";
@@ -25,6 +26,7 @@ const _sfc_main = {
 const App = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "E:/前端Forward/小程序资料/uniapp/uni-shopping/App.vue"]]);
 function createApp() {
   const app = common_vendor.createSSRApp(App);
+  app.use(store_store.store);
   return {
     app
   };
