@@ -27,9 +27,6 @@ const App = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "E:
 common_vendor.index.$http = common_vendor.$http;
 common_vendor.$http.baseUrl = "https://api-hmugo-web.itheima.net";
 common_vendor.$http.beforeRequest = function(options) {
-  common_vendor.index.showLoading({
-    title: "数据加载中..."
-  });
   if (options.url.indexOf("/my/") !== -1) {
     options.header = {
       Authorization: store_store.store.state.m_user.token
