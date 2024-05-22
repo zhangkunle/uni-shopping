@@ -24,6 +24,18 @@ const _sfc_main = {
   }
 };
 const App = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "E:/前端Forward/小程序资料/uniapp/uni-shopping/App.vue"]]);
+common_vendor.index.$http = common_vendor.$http;
+common_vendor.$http.baseUrl = "https://api-hmugo-web.itheima.net";
+common_vendor.$http.beforeRequest = function(options) {
+  common_vendor.index.showLoading({
+    title: "数据加载中..."
+  });
+  if (options.url.indexOf("/my/") !== -1) {
+    options.header = {
+      Authorization: store_store.store.state.m_user.token
+    };
+  }
+};
 function createApp() {
   const app = common_vendor.createSSRApp(App);
   app.use(store_store.store);

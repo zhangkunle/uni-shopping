@@ -1,9 +1,13 @@
 <template>
-  <my-login></my-login>
-  <my-userinfo></my-userinfo>
+  <my-userinfo v-if="token"></my-userinfo>
+  <my-login v-else></my-login>
+
 </template>
 
 <script>
+  import {
+    mapState
+  } from 'vuex';
   import badgeMinix from '../../mixins/tabbar_badge.js';
   export default {
     mixins: [badgeMinix],
@@ -11,6 +15,9 @@
       return {
 
       };
+    },
+    computed: {
+      ...mapState('m_user', ['token'])
     }
   }
 </script>
